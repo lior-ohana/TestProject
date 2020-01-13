@@ -6,9 +6,15 @@ from Classes.Question import *
 from Classes.Student import *
 from Files.readFile import *
 from Files.writeFile2 import *
+from datetime import datetime
+from Classes.LogWriter import *
+
+
 
 
 def database(user, user_type, class_managers, lecturers, students, questions, solutions, courses):
+
+    write_log(datetime.now(), datetime.now() - datetime.now(), "entered the data base")
     list2 = []
     if user_type == "class_manager":
         list2 = main_class_manager(user, lecturers, questions, solutions, courses)
@@ -24,6 +30,7 @@ def database(user, user_type, class_managers, lecturers, students, questions, so
 
 
 def main_class_manager(user, lecturers, questions, solutions, courses):
+    write_log(datetime.now(), datetime.now() - datetime.now(), "entered the main menu for class manager")
     choice = 0
     print("welcome to class manager menu, please insert number of the action you want to do:\n")
     print("1.add new lecturer to the system\n2.update or remove lecturer\n3.add new question to the system\n"
@@ -48,6 +55,7 @@ def main_class_manager(user, lecturers, questions, solutions, courses):
 
 
 def main_lecturer(user, questions, solutions):
+    write_log(datetime.now(), datetime.now() - datetime.now(), "entered the main menu for lecturer")
     choice = 0
     print("welcome to class manager menu, please insert number of the action you want to do:\n")
     print("1.add new question\n2.update or remove question info\n3.exit\n")
@@ -69,32 +77,47 @@ def main_lecturer(user, questions, solutions):
 
 
 def add_lecture(user, lecturers):
+    write_log(datetime.now(), datetime.now() - datetime.now(), "entered the menu for add lecturer")
+
     temp = ""
     name_course = ""
     new_lecture = Lecturer()
 
+    before=datetime.now()
     print("insert name for lecturer:\n")
     temp = input()
     new_lecture.name = temp
+    write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's name")
 
+    before=datetime.now()
     print("insert password for lecturer:\n")
     temp = input()
     new_lecture.password = temp
+    write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's password")
 
+    before=datetime.now()
     print("insert phone number for lecturer:\n")
     temp = input()
     new_lecture.phone_number = temp
+    write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's phone number")
 
+    before=datetime.now()
     new_lecture.department = user.department
+    write_log(datetime.now(), datetime.now() - before, "entered the lecturer's department by class managers")
 
+    before = datetime.now()
     new_lecture.list_courses = []
     while name_course != "-1":
         print("insert courses for the lecture ; if you want to exit press -1\n")
         name_course = input()
         if name_course != "-1":
             new_lecture.list_courses.append(Course(name_course, new_lecture.department))
+    write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's courses")
 
+    before=datetime.now()
     lecturers.append(new_lecture)
+    write_log(datetime.now(), datetime.now() - before, "new lecturer entered the data base")
+
     return lecturers
 
 

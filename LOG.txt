@@ -1,0 +1,27 @@
+2020-01-13 12:02:02.110612 RUN-TIME: 0:00:00.000997 LOG: read file database/Lecturers.txt
+2020-01-13 12:02:02.110612 RUN-TIME: 0:00:00 LOG: read file database/Class_Managers.txt
+2020-01-13 12:02:02.111610 RUN-TIME: 0:00:00 LOG: read file database/Students.txt
+2020-01-13 12:02:02.112608 RUN-TIME: 0:00:00 LOG: entered login menu
+2020-01-13 12:02:05.122762 RUN-TIME: 0:00:00 LOG: entered 'lecturer or class-manager login menu'
+2020-01-13 12:02:10.713795 RUN-TIME: 0:00:05.590036 LOG: user entered name and password
+2020-01-13 12:02:10.714794 RUN-TIME: 0:00:00 LOG: user details was not found, searching for class manager
+2020-01-13 12:02:10.715788 RUN-TIME: 0:00:00 LOG: user details confirmed, class manager logged in
+2020-01-13 12:02:10.716792 RUN-TIME: 0:00:00 LOG: read file database/Solutions.txt
+2020-01-13 12:02:10.718455 RUN-TIME: 0:00:00 LOG: read file database/Questions.txt
+2020-01-13 12:02:10.719452 RUN-TIME: 0:00:00 LOG: read file database/Courses.txt
+2020-01-13 12:02:10.720447 RUN-TIME: 0:00:00 LOG: entered the data base
+2020-01-13 12:02:10.720447 RUN-TIME: 0:00:00 LOG: entered the main menu for class manager
+2020-01-13 12:02:15.145938 RUN-TIME: 0:00:00 LOG: entered the menu for add lecturer
+2020-01-13 12:02:17.291205 RUN-TIME: 0:00:02.143621 LOG: user entered the lecturer's name
+2020-01-13 12:02:19.009555 RUN-TIME: 0:00:01.717353 LOG: user entered the lecturer's password
+2020-01-13 12:02:20.671001 RUN-TIME: 0:00:01.660447 LOG: user entered the lecturer's phone number
+2020-01-13 12:02:20.672226 RUN-TIME: 0:00:00 LOG: entered the lecturer's department by class managers
+2020-01-13 12:02:24.751543 RUN-TIME: 0:00:04.078319 LOG: user entered the lecturer's courses
+2020-01-13 12:02:24.753539 RUN-TIME: 0:00:00 LOG: new lecturer entered the data base
+2020-01-13 12:02:38.920440 RUN-TIME: 0:00:28.200988 LOG: entered login menu
+2020-01-13 12:02:42.399376 RUN-TIME: 0:00:00.000997 LOG: write file database/Questions.txt
+2020-01-13 12:02:42.401746 RUN-TIME: 0:00:00.001287 LOG: write file database/Solutions.txt
+2020-01-13 12:02:42.404746 RUN-TIME: 0:00:00.002003 LOG: write file database/Students.txt
+2020-01-13 12:02:42.405745 RUN-TIME: 0:00:00.000999 LOG: write file database/Class_Managers.txt
+2020-01-13 12:02:42.407740 RUN-TIME: 0:00:00.000999 LOG: write file database/Class_Managers.txt
+2020-01-13 12:02:42.409734 RUN-TIME: 0:00:00.000998 LOG: write file database/Courses.txt
