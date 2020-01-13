@@ -13,6 +13,9 @@ class Lecturer(Student):
         """
         self.password = password
         self.phone_number = phone_number
-        self.list_courses = list_courses.copy()
+        if list_courses is not None:
+            self.list_courses = list_courses.copy()
+        else:
+            self.list_courses = None
         self.department = department
         super().__init__(name)

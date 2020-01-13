@@ -2,8 +2,8 @@ from Classes.Solution import Solution
 
 
 class Question:
-    def __init__(self, code_q=None, subject=None, sub_subject=None, level=None, type_test=None, year=None, semester=None,
-                 term_test=None, format_q=None, is_solution=False, format_s=None, type_s=None):
+    def __init__(self, code_q=None, subject=None, sub_subject=None, level=None, type_test=None, year=None,
+                 semester=None, term_test=None, format_q=None, is_solution=False, format_s=None, type_s=None):
         """
         init question
         param sub: the subject of the question
