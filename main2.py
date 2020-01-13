@@ -41,21 +41,21 @@ def start():
     while not found or not want_exit:
         want_exit = False
         write_log(datetime.now(), datetime.now() - before, "entered login menu")
-        print("write \"Exit\" to exit the program.\n")
+        print("\nwrite \"Exit\" to exit the program.")
         print("Are you a student? Enter \"YES\" or \"NO\"")
         is_student = input().upper()
         before2 = datetime.now()
         if is_student.upper() == "EXIT":
             want_exit = True
-            continue
+            break
         if is_student == "YES":
             while not found and not want_exit:
                 write_log(datetime.now(), datetime.now() - before2, "entered 'student login menu'")
                 print("What is your name?")
 
                 before = datetime.now()
-                name = input().upper()
-                if name == "EXIT":
+                name = input().capitalize()
+                if name.upper() == "EXIT":
                     want_exit = True
                     write_log(datetime.now(), datetime.now() - before, "user decided to exit 'student login menu'")
                     continue
@@ -141,6 +141,11 @@ def start():
             else:
                 class_managers, lecturers, students = list_of_lists[0], list_of_lists[1], list_of_lists[2]
                 questions, solutions, courses = list_of_lists[3], list_of_lists[4], list_of_lists[5]
+                # reset all the user variables to "log out" of the user
+                found = False  # will check if the user was found
+                user_type = ""  # will mark if the user is student, lecturer or class manager
+                user = None  # will save the user itself
+                name = ""
 
     # got here meaning he wants to exit
     # then lets write to files

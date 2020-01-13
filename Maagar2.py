@@ -10,10 +10,7 @@ from datetime import datetime
 from Classes.LogWriter import *
 
 
-
-
 def database(user, user_type, class_managers, lecturers, students, questions, solutions, courses):
-
     write_log(datetime.now(), datetime.now() - datetime.now(), "entered the data base")
     list2 = []
     if user_type == "class_manager":
@@ -25,7 +22,7 @@ def database(user, user_type, class_managers, lecturers, students, questions, so
     elif user_type == "lecturer":
         questions, solutions = main_lecturer(user, questions, solutions)
     elif user_type == "student":
-        pass #TODO: what to do with the student.
+        print("the ma'agar is in development")  # the menu for the student is not ready to be used.
     return [class_managers, lecturers, students, questions, solutions, courses]
 
 
@@ -47,6 +44,7 @@ def main_class_manager(user, lecturers, questions, solutions, courses):
             questions, solutions = update_or_delete_question(questions, solutions)
         elif choice == "5":
             print("Goodbye\n")
+            return [lecturers, questions, solutions, courses]
         else:
             print("invalid input, try again.\n")
         print("You're back in the menu. Please choose:\n1.add new lecturer to the system\n2.update or remove lecturer\n"
@@ -83,25 +81,25 @@ def add_lecture(user, lecturers):
     name_course = ""
     new_lecture = Lecturer()
 
-    before=datetime.now()
+    before = datetime.now()
     print("insert name for lecturer:\n")
     temp = input()
     new_lecture.name = temp
     write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's name")
 
-    before=datetime.now()
+    before = datetime.now()
     print("insert password for lecturer:\n")
     temp = input()
     new_lecture.password = temp
     write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's password")
 
-    before=datetime.now()
+    before = datetime.now()
     print("insert phone number for lecturer:\n")
     temp = input()
     new_lecture.phone_number = temp
     write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's phone number")
 
-    before=datetime.now()
+    before = datetime.now()
     new_lecture.department = user.department
     write_log(datetime.now(), datetime.now() - before, "entered the lecturer's department by class managers")
 
@@ -114,7 +112,7 @@ def add_lecture(user, lecturers):
             new_lecture.list_courses.append(Course(name_course, new_lecture.department))
     write_log(datetime.now(), datetime.now() - before, "user entered the lecturer's courses")
 
-    before=datetime.now()
+    before = datetime.now()
     lecturers.append(new_lecture)
     write_log(datetime.now(), datetime.now() - before, "new lecturer entered the data base")
 
@@ -136,31 +134,36 @@ def update(lecturers):
             if name.capitalize() == "Exit":
                 end = True
                 continue
+            found = False
             for x in lecturers:
-
                 if x.name == name.capitalize():
                     print("what do you want to update:\n 1.name\n 2.password\n "
                           "3.phone number\n 4.department\n 5.courses\n")
+                    found = True
                     choice2 = input()
                     if choice2 == "1":
                         print("insert new name for lecturer:\n")
                         temp = input()
                         x.name = temp
+                        print("name changed.\n\nyou can update another lecturer")
                     elif choice2 == "2":
                         print("insert new password for lecturer:\n")
                         temp = input()
                         x.password = temp
+                        print("password changed.\n\nyou can update another lecturer")
                     elif choice2 == "3":
                         print("insert new phone number for lecturer:\n")
                         temp = input()
                         x.phone_number = temp
+                        print("phone number changed.\n\nyou can update another lecturer")
                     elif choice2 == "4":
                         print("insert new department for lecturer:\n")
                         temp = input()
                         x.department = temp
+                        print("department changed.\n\nyou can update another lecturer")
                     elif choice2 == "5":
                         exit1 = False
-                        while (exit1 == False):
+                        while not exit1:
                             print("press 1-if you want to delete course\n"
                                   " 2-if you want to add course\n or press -1 to exit\n")
                             choice3 = input()
@@ -178,8 +181,8 @@ def update(lecturers):
                                 exit1 = True
                             else:
                                 print("you enter invalid number,try again\n")
-                else:
-                    print("wrong name")
+            if not found:
+                print("wrong name")
 
     if choice == "2":
         print("insert name of lecturer to remove:\n")
@@ -207,15 +210,18 @@ def add_solution(code_q, list_solutions):
 
 
 def add_question(list_questions, list_solutions):
-    found = True
+    found = False
     ques = None
     code = 0
     while not found:
         code = random.randint(0, 100000)
         for i in list_questions:
             if code == i.code_q:
-                found = False
-                ques = Question(code)
+                found = True
+        if not found:
+            break
+
+    ques = Question(code)
 
     # got here meaning we have valid code
     print("Please Enter Subject: ")
