@@ -4,6 +4,7 @@ from Classes.Question import *
 from Classes.Student import *
 
 
+
 def read_file_lecturer(name_file1):
     file = open(name_file1, "r")
     info_file = file.read()
@@ -120,11 +121,11 @@ def read_file_student(name_file1):
     index_sl = 0  # index course
 
     for x in list_row:
-        x = x.split(' ')  # save list of all the words in row[i] of the file
+        x = x.split()  # save list of all the words in row[i] of the file
         name_s = ""  # name of the student
-        for i in range(1, len(x) + 1):
+        for i in range(1, len(x)):
             name_s = name_s + x[i]
-        list_student.append(Student(name_s))
+        list_student.append(Student(name_s.capitalize()))
         index_sl = index_sl + 1
 
     file.close()
@@ -173,8 +174,8 @@ def read_file_question(name_file1, list_solution):
     index_q = 0  # index course
 
     for x in list_row:
-        index = 1  # index 1 to take the word after word "name:" -index of the words in row
-        x = x.split(' ')  # save list of all the words in row[i] of the file
+        index = 1  # index 1 to take the word after word "Code_q:" -index of the words in row
+        x = x.split()  # save list of all the words in row[i] of the file
         sub1 = ""
         sub_subject = ""
         level = ""
@@ -283,6 +284,8 @@ def read_file_solution(name_file1):
         index = index + 2
         # type of the solution
         list_solution[index_s].type_s = x[index]
+        index_s += 1
+        index = 1
 
     file.close()
 
