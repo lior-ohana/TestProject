@@ -17,13 +17,13 @@ def start():
     questions, solutions, courses = None, None, None
 
     found = False  # will check if the user was found
-    # user_type = ""  # will mark if the user is student, lecturer or class manager
+    user_type = ""  # will mark if the user is student, lecturer or class manager
     user = None  # will save the user itself
     name = ""
     want_exit = False
 
     print("Welcome to the Question dataBase.")
-    while not want_exit:
+    while not found or not want_exit:
         print("write \"Exit\" to exit the program.\n")
         print("Are you a student? Enter \"YES\" or \"NO\"")
         is_student = input().upper()
@@ -43,8 +43,8 @@ def start():
                         user_type = "student"
                         user = x
                         break  # student found stop looking
-                    else:
-                        print("Name was Not found. Please Enter Again.")
+                if not found:
+                    print("Name was Not found. Please Enter Again.")
 
         while not found and not want_exit:
             print("Please enter Your name and password")
@@ -108,7 +108,7 @@ def start():
     if solutions is not None:
         write_all_solutions("database/Solutions.txt", solutions)
     write_all_students("database/Students.txt", students)
-    write_all_lecturers_class_managers("database/Class_Mangers.txt", class_managers)
+    write_all_lecturers_class_managers("database/Class_Managers.txt", class_managers)
     write_all_lecturers_class_managers("database/Lecturers.txt", lecturers)
     if courses is not None:
         write_all_courses("database/Courses.txt", courses)
