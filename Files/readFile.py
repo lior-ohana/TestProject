@@ -19,13 +19,17 @@ def read_file_lecturer(name_file1):
         name_c = ""  # name of the course
 
         # name of the lecture
-        while x[index] != "Phone:":
+        while x[index] != "Password:":
             name_l += x[index] + ' '
             index = index + 1
-        list_lecture[index_il] = Lecturer(name_l)  # create object Lecturer
+        list_lecture.append(Lecturer(name_l.strip().capitalize()))  # create object Lecturer
+
+        # password of the lecture
+        index = index + 1
+        list_lecture[index_il].password = x[index]
 
         # phone of the lecture
-        index = index + 1
+        index = index + 2
         list_lecture[index_il].phone_number = x[index]
 
         # department of the lecture
@@ -37,13 +41,16 @@ def read_file_lecturer(name_file1):
         index = index + 1
 
         courses_len = len(x) - index
-
+        list_lecture[index_il].list_courses = []
         # add course to the list of the courses
-        for i in range(1, courses_len // 2 + 1):  # until the end of the words in the row
-            while x[index] != ("Course" + str(i + 1) + ":"):
-                name_c = name_c + x[index]
+        for i in range(1, courses_len // 2 + 2):  # until the end of the words in the row
+            while index != len(x):
+                if x[index] != ("Course" + str(i + 1) + ":"):
+                    name_c = name_c + x[index]
+                else:
+                    list_lecture[index_il].list_courses.append(Course(name_c,dep_l))
                 index = index+1
-            list_lecture[index_il].list_courses[i].append(x[index_il])
+            list_lecture[index_il].list_courses.append(Course(name_c,dep_l))  # entering the last course
         index_il = index_il + 1
 
     file.close()
@@ -55,7 +62,7 @@ def read_file_class_manager(name_file1):
     file = open(name_file1, "r")
     info_file = file.read()
     list_row = info_file.splitlines()  # save list of all the rows in the file
-    list_class_manager = []  # list of all the class manager
+    list_class_manager = []  # list of all the lecture
     index_im = 0  # index of the list
 
     for x in list_row:
@@ -65,17 +72,21 @@ def read_file_class_manager(name_file1):
         dep_l = ""
         name_c = ""  # name of the course
 
-        # name of the class manager
-        while x[index] != "Phone:":
+        # name of the lecture
+        while x[index] != "Password:":
             name_l += x[index] + ' '
             index = index + 1
-        list_class_manager[index_im] = ClassManager(name_l)  # create object class manager
+        list_class_manager.append(Lecturer(name_l.strip().capitalize()))  # create object Lecturer
+
+        # password of the lecture
+        index = index + 1
+        list_class_manager[index_im].password = x[index]
 
         # phone of the lecture
-        index = index + 1
+        index = index + 2
         list_class_manager[index_im].phone_number = x[index]
 
-        # department of the class manager
+        # department of the lecture
         index = index + 2
         while x[index] != "Course1:":
             dep_l += x[index]
@@ -84,17 +95,20 @@ def read_file_class_manager(name_file1):
         index = index + 1
 
         courses_len = len(x) - index
-
+        list_class_manager[index_im].list_courses = []
         # add course to the list of the courses
-        for i in range(1, courses_len // 2 + 1):  # until the end of the words in the row
-            while x[index] != ("Course" + str(i + 1) + ":"):
-                name_c = name_c + x[index]
+        for i in range(1, courses_len // 2 + 2):  # until the end of the words in the row
+            while index != len(x):
+                if x[index] != ("Course" + str(i + 1) + ":"):
+                    name_c = name_c + x[index]
+                else:
+                    list_class_manager[index_im].list_courses.append(Course(name_c,dep_l))
                 index = index+1
-            list_class_manager[index_im].list_courses[i].append(x[index_im])
-
+            list_class_manager[index_im].list_courses.append(Course(name_c,dep_l))  # entering the last course
         index_im = index_im + 1
 
     file.close()
+
     return list_class_manager
 
 
@@ -110,7 +124,7 @@ def read_file_student(name_file1):
         name_s = ""  # name of the student
         for i in range(1, len(x) + 1):
             name_s = name_s + x[i]
-        list_student[index_sl] = Student(name_s)
+        list_student.append(Student(name_s))
         index_sl = index_sl + 1
 
     file.close()
@@ -134,7 +148,7 @@ def read_file_course(name_file1):
         while x[index] != "Department:":
             name_c += x[index] + ' '
             index = index + 1
-        list_course[index_c] = Course(name_c)
+        list_course.append(Course(name_c.strip().capitalize()))
 
         index = index + 1
 
@@ -167,66 +181,79 @@ def read_file_question(name_file1, list_solution):
         type_test = ""
         year = ""
         semester = ""
-        # Todo: add term
         term = ""
         format_q = ""
 
         # code of the question
-        list_question[index_q] = Question(x[index])
+        list_question.append(Question(x[index]))
         index = index + 2
 
         # the subject of the question
-        while x[index] != "sub_subject:":
-            sub1 = sub1 + x[index]
-        list_question[index_q].subject = sub1
+        while x[index] != "Sub_subject:":
+            sub1 = sub1 + x[index] + ' '
+            index = index + 1
+        list_question[index_q].subject = sub1.strip()
 
         index = index + 1
 
         # the sub theme of the question
         while x[index] != "Level:":
-            sub_subject = sub_subject + x[index]
-        list_question[index_q].sub_subject = sub_subject
+            sub_subject = sub_subject + x[index] + ' '
+            index = index + 1
+        list_question[index_q].sub_subject = sub_subject.strip()
 
         index = index + 1
 
         # level of the question
         while x[index] != "Type_test:":
-            level = level + x[index]
-        list_question[index_q].level = x[index]
+            level = level + x[index] + ' '
+            index = index + 1
+        list_question[index_q].level = level.strip()
 
         index = index + 1
 
         # the type of the test
         while x[index] != "Year:":
-            type_test = type_test + x[index]
-        list_question[index_q].type_test = x[index]
+            type_test = type_test + x[index] + ' '
+            index = index + 1
+        list_question[index_q].type_test = type_test.strip()
 
         index = index + 1
 
         # the year of the test
         while x[index] != "Semester:":
-            year = year + x[index]
-        list_question[index_q].year = x[index]
+            year = year + x[index] + ' '
+            index = index + 1
+        list_question[index_q].year = year.strip()
 
         index = index + 1
 
-        # the term of the test
-        # TODO: add reading the term of the test
+        # the semester of the test
+        while x[index] != "Term_test:":
+            semester = semester + x[index] + ' '
+            index = index + 1
+        list_question[index_q].semester = semester.strip()
+
+        index = index + 1
+
+        # term
         while x[index] != "Format_q:":
-            semester = semester + x[index]
-        list_question[index_q].semester = x[index]
+            term = term + x[index] + ' '
+            index = index + 1
+        list_question[index_q].term_test = term.strip()
 
         index = index + 1
 
         # the format of the question
         while x[index] != "Is_solution:":
-            format_q = format_q + x[index]
-        list_question[index_q].format_q = x[index]
+            format_q = format_q + x[index] + ' '
+            index = index + 1
+        list_question[index_q].format_q = format_q.strip()
 
         index = index + 1
         list_question[index_q].is_solution = x[index]
 
-        if x[index]:
+        if x[index].capitalize() != "False":
             for j in list_solution:
                 if j.code_q == list_question[index_q].code_q:
                     list_question[index_q].solution = j
@@ -248,10 +275,8 @@ def read_file_solution(name_file1):
 
     for x in list_row:
         x = x.split(" ")
-        # TODO: add code_q
-
         # format of the solution
-        list_solution[index_s] = Solution(x[index])
+        list_solution.append(Solution(x[index]))
         index = index + 2
         # format of the solution
         list_solution[index_s].format_s = x[index]
